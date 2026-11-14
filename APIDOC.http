@@ -1,0 +1,35 @@
+# ===================== accounts ===========================
+#api call for creating auser
+###
+POST http://127.0.0.1:8000/accounts/register/
+Content-Type: application/json
+
+{
+    "username":"abhishek",
+    "password":"abhishek@123",
+    "phone":"9497328668",
+    "height":172,
+    "weight":61,
+    "dob":"2005-12-07"
+}
+
+# ======================= Food Entries ===========================
+#api call for listing all food entries
+###
+GET http://127.0.0.1:8000/foods/
+Accept: application/json
+Authorization: Basic abhishek:abhishek@123
+
+#api call for creating a food_entry
+###
+POST http://127.0.0.1:8000/foods/
+Content-Type: application/json
+Authorization: Basic abhishek:abhishek@123
+
+{
+    "title":"biriyani",
+    "serving_size":"200 gm",
+    "calorie":400,
+    "meal_type":"lunch"
+    
+}
