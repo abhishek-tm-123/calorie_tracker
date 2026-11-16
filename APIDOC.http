@@ -5,9 +5,9 @@ POST http://127.0.0.1:8000/accounts/register/
 Content-Type: application/json
 
 {
-    "username":"abhishek",
-    "password":"abhishek@123",
-    "phone":"9497328668",
+    "username":"abinandha",
+    "password":"abinandha@123",
+    "phone":"9497328661",
     "height":172,
     "weight":61,
     "dob":"2005-12-07"
@@ -33,3 +33,32 @@ Authorization: Basic abhishek:abhishek@123
     "meal_type":"lunch"
     
 }
+
+#api call for retrieving a foodlog
+###
+GET http://127.0.0.1:8000/foods/1/
+Accept: application/json
+Authorization: Basic abinandha:abinandha@123
+
+#api call for updating a foodlog
+###
+PUT http://127.0.0.1:8000/foods/1/
+Content-Type: application/json
+Authorization: Basic abhishek:abhishek@123
+
+{
+  "id": 1,
+  "title": "biriyani",
+  "serving_size": "200 gm",
+  "calorie": 450.0,
+  "meal_type": "lunch",
+  "food_image": null,
+  "created_at": "2026-11-12T15:15:46.676045Z",
+  "owner": 1
+}
+
+#api call for deleting a foodlog
+###
+DELETE http://127.0.0.1:8000/foods/1/
+Accept: application/json
+Authorization: Basic abhishek:abhishek@123
