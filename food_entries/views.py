@@ -14,7 +14,9 @@ from datetime import datetime
 
 class FoodLogListCreateView(APIView):
     
-    authentication_classes = [authentication.BasicAuthentication]
+    #authentication_classes = [authentication.BasicAuthentication]
+    
+    authentication_classes=[authentication.TokenAuthentication]
     
     permission_classes = [permissions.IsAuthenticated]
     
@@ -49,7 +51,8 @@ class FoodLogListCreateView(APIView):
         
 class FoodLogRetrieveUpdateDeleteView(APIView):
     
-    authentication_classes = [authentication.BasicAuthentication]
+    # authentication_classes = [authentication.BasicAuthentication]
+    authentication_classes=[authentication.TokenAuthentication]
     
     permission_classes = [IsOwner]
     
@@ -89,7 +92,8 @@ class FoodLogRetrieveUpdateDeleteView(APIView):
 
 class FoodLogSummaryView(APIView):
     
-    authentication_classes = [authentication.BasicAuthentication]
+    # authentication_classes = [authentication.BasicAuthentication]
+    authentication_classes=[authentication.TokenAuthentication]
     
     permission_classes = [permissions.IsAuthenticated]
     
@@ -98,14 +102,20 @@ class FoodLogSummaryView(APIView):
         auth_user_foodlogs = FoodLog.objects.filter(owner=request.user)
         
         response_data = {
-            "todays_total":0,
-            "monthly_total":0
+            "todays_calorie":0,
+            "monthly_calorie":0
         }
-        
+        # todays
         cur_date = datetime.today().date()
         
         todays_total = auth_user_foodlogs.filter(created_at__date = cur_date).values("calorie").aggregate(total=Sum("calorie")).get("total")
         
-        response_data["todays_total"] = todays_total
+        response_data["todays_calorie"] = todays_total
+        # monthly
+        cur_month = datetime.today().month
+        cur_year = datetime.today().year
+        
+        monthly_total = auth_user_foodlogs.filter(created_at__month=cur_month,created_at__year=cur_year).values("calorie").aggregate(total=Sum("calorie")).get("total")
+        response_data["monthly_calorie"] = monthly_total
         
         return Response(response_data)

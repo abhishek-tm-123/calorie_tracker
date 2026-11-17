@@ -19,13 +19,18 @@ from django.urls import path
 
 from accounts.views import SignUpView
 
-from food_entries.views import FoodLogListCreateView,FoodLogRetrieveUpdateDeleteView
+from food_entries.views import FoodLogListCreateView,FoodLogRetrieveUpdateDeleteView,FoodLogSummaryView
+
+from rest_framework.authtoken.views import ObtainAuthToken
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # accounts
     path('accounts/register/',SignUpView.as_view()),
     # food_entries
-    path('foods/',FoodLogListCreateView.as_view()),
-    path('foods/<int:pk>/',FoodLogRetrieveUpdateDeleteView.as_view()),
+    path('foodlogs/',FoodLogListCreateView.as_view()),
+    path('foodlogs/<int:pk>/',FoodLogRetrieveUpdateDeleteView.as_view()),
+    path('foodlogs/summary/',FoodLogSummaryView.as_view()),
+    #token
+    path('token/',ObtainAuthToken.as_view()),
 ]

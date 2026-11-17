@@ -13,38 +13,48 @@ Content-Type: application/json
     "dob":"2005-12-07"
 }
 
+#api call for generating token
+###
+POST http://127.0.0.1:8000/token/
+Content-Type: application/json
+
+{
+    "username":"abhishek",
+    "password":"abhishek@123"
+}
+
 # ======================= Food Entries ===========================
 #api call for listing all food entries
 ###
-GET http://127.0.0.1:8000/foods/
+GET http://127.0.0.1:8000/foodlogs/
 Accept: application/json
-Authorization: Basic abhishek:abhishek@123
+Authorization: Token c96cb5da5ab9f3dd34c832342766333357b0c71f
 
 #api call for creating a food_entry
 ###
-POST http://127.0.0.1:8000/foods/
+POST http://127.0.0.1:8000/foodlogs/
 Content-Type: application/json
-Authorization: Basic abhishek:abhishek@123
+Authorization: Token c96cb5da5ab9f3dd34c832342766333357b0c71f
 
 {
-    "title":"biriyani",
-    "serving_size":"200 gm",
-    "calorie":400,
+    "title":"mandhi",
+    "serving_size":"250 gm",
+    "calorie":450,
     "meal_type":"lunch"
     
 }
 
 #api call for retrieving a foodlog
 ###
-GET http://127.0.0.1:8000/foods/1/
+GET http://127.0.0.1:8000/foodlogs/1/
 Accept: application/json
-Authorization: Basic abinandha:abinandha@123
+Authorization: Token c96cb5da5ab9f3dd34c832342766333357b0c71f
 
 #api call for updating a foodlog
 ###
-PUT http://127.0.0.1:8000/foods/1/
+PUT http://127.0.0.1:8000/foodlogs/1/
 Content-Type: application/json
-Authorization: Basic abhishek:abhishek@123
+Authorization: Token c96cb5da5ab9f3dd34c832342766333357b0c71f
 
 {
   "id": 1,
@@ -59,6 +69,12 @@ Authorization: Basic abhishek:abhishek@123
 
 #api call for deleting a foodlog
 ###
-DELETE http://127.0.0.1:8000/foods/1/
+DELETE http://127.0.0.1:8000/foodlogs/1/
 Accept: application/json
-Authorization: Basic abhishek:abhishek@123
+Authorization: Token c96cb5da5ab9f3dd34c832342766333357b0c71f
+
+#api call foodlog summary
+###
+GET http://127.0.0.1:8000/foodlogs/summary/
+Accept: application/json
+Authorization: Token c96cb5da5ab9f3dd34c832342766333357b0c71f
